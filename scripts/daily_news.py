@@ -20,7 +20,7 @@ MAX_ARTICLES = 60
 
 # Replace this placeholder with a monitored contact email
 # before running the SEC collector.
-SEC_CONTACT_EMAIL = "YOUR_CONTACT_EMAIL"
+SEC_CONTACT_EMAIL = "themarketbrief@gmail.com"
 
 HEADERS = {
     "User-Agent": (
