@@ -464,6 +464,61 @@
       font-size: 11px;
     }
 
+
+    /* THIRD-PARTY MARKET WIDGETS */
+    .tv-panel {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: var(--paper-light);
+      overflow: hidden;
+    }
+    .tv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .tv-widget-container,
+    .tradingview-widget-container {
+      width: 100%;
+      min-width: 0;
+    }
+    .tv-ticker {
+      min-height: 70px;
+    }
+    .tv-market-overview {
+      min-height: 520px;
+    }
+    .tv-heatmap {
+      min-height: 560px;
+    }
+    .widget-heading {
+      margin: 0 0 12px;
+      font: 500 21px var(--serif);
+    }
+    .widget-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+    .tradingview-widget-copyright {
+      padding-top: 6px;
+      color: var(--muted);
+      font-size: 9px;
+      text-align: right;
+    }
+    .tradingview-widget-copyright a {
+      color: var(--gold);
+    }
+    .ticker {
+      padding: 15px 0;
+    }
+    @media (max-width: 850px) {
+      .tv-grid { grid-template-columns: 1fr; }
+    }
+
     /* NEWS */
 
     .news-section {
@@ -574,6 +629,45 @@
       color: #c8c5bb;
       font-size: 13px;
       line-height: 1.9;
+    }
+
+
+    /* COMMERCIAL PARTNERSHIPS */
+    .partnership-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: 44px 0 28px;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      background: var(--paper-light);
+    }
+    .partnership-panel h2 {
+      margin: 8px 0 10px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.45rem, 2.6vw, 2rem);
+      font-weight: 500;
+    }
+    .partnership-panel p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .partnership-link {
+      flex: 0 0 auto;
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 7px;
+    }
+    .partnership-link span { color: var(--gold); margin-left: 5px; }
+    @media (max-width: 680px) {
+      .partnership-panel { align-items: flex-start; flex-direction: column; padding: 24px; }
     }
 
     /* DISCLOSURE */
@@ -783,6 +877,7 @@
         <a href="#briefing">The Briefing</a>
         <a href="#economics">Economic Data</a>
         <a href="#perspective">Our Philosophy</a>
+          <a href="/admin/">Editorial Dashboard</a>
       </nav>
     </div>
   </header>
@@ -813,10 +908,30 @@
       </section>
 
       <div class="ticker">
-        <div class="container ticker-inner">
-          <span class="ticker-label">GLOBAL MARKETS</span>
-          <div id="ticker-items" class="ticker-inner">
-            <span class="loading">Loading available market data...</span>
+        <div class="container">
+          <div class="eyebrow" style="margin-bottom:10px">Global Market Ticker</div>
+          <div class="tradingview-widget-container tv-ticker">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track markets on TradingView</span></a></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+              "symbols": [
+                {"proName":"SP:SPX","title":"S&P 500"},
+                {"proName":"NASDAQ:NDX","title":"Nasdaq 100"},
+                {"proName":"DJ:DJI","title":"Dow Jones"},
+                {"proName":"XETR:DAX","title":"DAX"},
+                {"proName":"TVC:UKX","title":"FTSE 100"},
+                {"proName":"TVC:NI225","title":"Nikkei 225"},
+                {"proName":"TVC:GOLD","title":"Gold"},
+                {"proName":"FX:EURUSD","title":"EUR/USD"}
+              ],
+              "showSymbolLogo": true,
+              "colorTheme": "light",
+              "isTransparent": true,
+              "displayMode": "adaptive",
+              "locale": "en"
+            }
+            </script>
           </div>
         </div>
       </div>
@@ -825,13 +940,58 @@
         <div class="section-heading">
           <div>
             <div class="eyebrow">The Global Picture</div>
-            <h2>Markets at a Glance</h2>
+            <h2>World Markets at a Glance</h2>
           </div>
-          <p id="market-updated">Waiting for market data</p>
+          <p>Market data supplied by TradingView</p>
         </div>
-
-        <div id="global-markets">
-          <p class="loading">Loading global market information...</p>
+        <div class="tv-panel">
+          <div class="tradingview-widget-container tv-market-overview">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener nofollow" target="_blank"><span class="blue-text">Global market data</span></a> by TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+              "colorTheme": "light",
+              "dateRange": "1D",
+              "showChart": true,
+              "locale": "en",
+              "largeChartUrl": "",
+              "isTransparent": true,
+              "showSymbolLogo": true,
+              "showFloatingTooltip": false,
+              "width": "100%",
+              "height": "520",
+              "tabs": [
+                {
+                  "title": "North America",
+                  "symbols": [
+                    {"s":"SP:SPX","d":"S&P 500"},
+                    {"s":"NASDAQ:NDX","d":"Nasdaq 100"},
+                    {"s":"DJ:DJI","d":"Dow Jones"},
+                    {"s":"TSX:TSX","d":"S&P/TSX"}
+                  ]
+                },
+                {
+                  "title": "Europe",
+                  "symbols": [
+                    {"s":"XETR:DAX","d":"DAX"},
+                    {"s":"TVC:UKX","d":"FTSE 100"},
+                    {"s":"EURONEXT:PX1","d":"CAC 40"},
+                    {"s":"TVC:STOXX50E","d":"Euro Stoxx 50"}
+                  ]
+                },
+                {
+                  "title": "Asia Pacific",
+                  "symbols": [
+                    {"s":"TVC:NI225","d":"Nikkei 225"},
+                    {"s":"HKEX:HSI","d":"Hang Seng"},
+                    {"s":"SSE:000001","d":"Shanghai Composite"},
+                    {"s":"ASX:XJO","d":"ASX 200"}
+                  ]
+                }
+              ]
+            }
+            </script>
+          </div>
         </div>
       </section>
 
@@ -839,59 +999,91 @@
         <div class="section-heading">
           <div>
             <div class="eyebrow">Market Activity</div>
-            <h2>Today's Market Movers</h2>
+            <h2>Global Stock Performance</h2>
           </div>
-          <p>Based on available quote data</p>
+          <p>Performance data supplied by TradingView</p>
         </div>
-
-        <div class="two-column">
-          <div class="data-panel">
-            <h3>Top Gainers</h3>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Company</th>
-                  <th>Price</th>
-                  <th>Change</th>
-                </tr>
-              </thead>
-              <tbody id="top-gainers">
-                <tr><td class="empty-row" colspan="3">Market data unavailable.</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="data-panel">
-            <h3>Top Decliners</h3>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Company</th>
-                  <th>Price</th>
-                  <th>Change</th>
-                </tr>
-              </thead>
-              <tbody id="top-decliners">
-                <tr><td class="empty-row" colspan="3">Market data unavailable.</td></tr>
-              </tbody>
-            </table>
+        <div class="tv-panel">
+          <div class="tradingview-widget-container tv-heatmap">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/heatmap/stock/" rel="noopener nofollow" target="_blank"><span class="blue-text">Explore the stock market</span></a> by TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+            {
+              "exchanges": [],
+              "dataSource": "SPX500",
+              "grouping": "sector",
+              "blockSize": "market_cap_basic",
+              "blockColor": "change",
+              "locale": "en",
+              "symbolUrl": "",
+              "colorTheme": "light",
+              "hasTopBar": true,
+              "isDataSetEnabled": true,
+              "isZoomEnabled": true,
+              "hasSymbolTooltip": true,
+              "width": "100%",
+              "height": "560"
+            }
+            </script>
           </div>
         </div>
+        <p class="widget-note">The heatmap groups companies by sector and market capitalization. Color reflects the selected performance measure. It is a market overview, not a recommendation.</p>
       </section>
 
       <section class="data-section" id="assets">
         <div class="section-heading">
           <div>
-            <div class="eyebrow">Beyond Equities</div>
+            <div class="eyebrow">Additional Market References</div>
             <h2>Currencies & Commodities</h2>
           </div>
-          <p>Available reference prices</p>
+          <p>Third-party market widgets</p>
         </div>
-
-        <div class="asset-grid" id="asset-grid">
-          <div class="asset-card">
-            <h3>Currency and commodity data</h3>
-            <p class="loading">Waiting for available data...</p>
+        <div class="tv-grid">
+          <div class="tv-panel">
+            <h3 class="widget-heading">Major Currency Rates</h3>
+            <div class="tradingview-widget-container tv-forex">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/currencies/" rel="noopener nofollow" target="_blank"><span class="blue-text">Forex market data</span></a> by TradingView</div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+              {
+                "width": "100%",
+                "height": "420",
+                "currencies": ["EUR","USD","JPY","GBP","CHF","AUD","CAD","NZD"],
+                "isTransparent": true,
+                "colorTheme": "light",
+                "locale": "en"
+              }
+              </script>
+            </div>
+          </div>
+          <div class="tv-panel">
+            <h3 class="widget-heading">Commodity Benchmarks</h3>
+            <div class="tradingview-widget-container tv-commodities">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/commodities/" rel="noopener nofollow" target="_blank"><span class="blue-text">Commodity market data</span></a> by TradingView</div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+              {
+                "width": "100%",
+                "height": "420",
+                "symbolsGroups": [
+                  {
+                    "name": "Commodities",
+                    "symbols": [
+                      {"name":"TVC:GOLD","displayName":"Gold"},
+                      {"name":"TVC:SILVER","displayName":"Silver"},
+                      {"name":"TVC:USOIL","displayName":"WTI Crude Oil"},
+                      {"name":"TVC:UKOIL","displayName":"Brent Crude Oil"},
+                      {"name":"TVC:NATGAS","displayName":"Natural Gas"}
+                    ]
+                  }
+                ],
+                "showSymbolLogo": false,
+                "isTransparent": true,
+                "colorTheme": "light",
+                "locale": "en"
+              }
+              </script>
+            </div>
           </div>
         </div>
       </section>
@@ -916,7 +1108,7 @@
             <div class="eyebrow">The Global Economy</div>
             <h2>Economic Indicators</h2>
           </div>
-          <p>Officially sourced economic information</p>
+          <p>Latest published observations from official sources</p>
         </div>
 
         <div class="economic-grid" id="economic-grid">
@@ -936,15 +1128,25 @@
         </p>
       </section>
 
-      <div class="disclosure">
+
+      <section class="partnership-panel" aria-labelledby="partnership-title">
+        <div>
+          <div class="eyebrow">Commercial Partnerships</div>
+          <h2 id="partnership-title">Reach an audience that follows the markets.</h2>
+          <p>
+            The Market Brief welcomes relevant advertising, clearly identified sponsorships,
+            and carefully selected commercial partnerships. Editorial coverage remains independent.
+          </p>
+        </div>
+        <a class="partnership-link" href="mailto:themarketbrief@gmail.com?subject=The%20Market%20Brief%20Partnership%20Inquiry">
+          Discuss a partnership <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <div class="disclosure" id="disclosure">
         <strong>Data & Editorial Disclosure</strong>
         <p>
-          Market prices may be delayed or reflect the latest available
-          end-of-day information. Each data source and timestamp should be
-          considered before interpreting a quote. Some exchanges and financial
-          instruments may not have available free data. News and analysis are
-          provided for general educational and informational purposes and do
-          not constitute investment advice.
+          Market widgets and quotes are provided by TradingView. Data availability and timing vary by exchange and instrument; some prices may be delayed or end-of-day. TradingView branding and source links are retained. Economic indicators are sourced from the agencies identified on each card. News and commentary are for general educational and informational purposes only and do not constitute investment advice. Any paid placements, sponsored content, or affiliate relationships will be clearly identified. Commercial relationships do not determine editorial coverage, and compensation does not guarantee favorable coverage.
         </p>
       </div>
 
@@ -976,6 +1178,8 @@
           <a href="#perspective">Our Philosophy</a>
           <a href="mailto:themarketbrief@gmail.com">Contact</a>
           <a href="#disclosure">Data Disclosure</a>
+          <a href="/admin/">Editorial Desk</a>
+          <a href="mailto:themarketbrief@gmail.com?subject=The%20Market%20Brief%20Partnership%20Inquiry">Advertising & Partnerships</a>
         </div>
       </div>
 
@@ -990,7 +1194,6 @@
     "use strict";
 
     const API = {
-      markets: "/api/public/market-overview",
       briefing: "/api/public/briefing",
       economic: "/api/public/economic"
     };
@@ -1010,60 +1213,16 @@
     function safeURL(value) {
       try {
         const url = new URL(value, window.location.origin);
-        if (url.protocol === "https:" || url.protocol === "http:") {
-          return url.href;
-        }
-      } catch (_) {}
-      return "";
-    }
-
-    function formatNumber(value, decimals = 2) {
-      const number = Number(value);
-      if (!Number.isFinite(number)) return "—";
-
-      return new Intl.NumberFormat("en-US", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals
-      }).format(number);
-    }
-
-    function formatPrice(value, currency = "USD") {
-      const number = Number(value);
-      if (!Number.isFinite(number)) return "—";
-
-      try {
-        return new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: currency || "USD",
-          maximumFractionDigits: 2
-        }).format(number);
+        return ["https:", "http:"].includes(url.protocol) ? url.href : "";
       } catch (_) {
-        return `${formatNumber(number)} ${currency}`;
+        return "";
       }
     }
 
-    function formatChange(value) {
-      const number = Number(value);
-      if (!Number.isFinite(number)) return "—";
-
-      const prefix = number > 0 ? "+" : "";
-      return `${prefix}${formatNumber(number)}%`;
-    }
-
-    function changeClass(value) {
-      const number = Number(value);
-      if (!Number.isFinite(number)) return "neutral";
-      if (number > 0) return "positive";
-      if (number < 0) return "negative";
-      return "neutral";
-    }
-
     function formatTimestamp(value) {
-      if (!value) return "Timestamp unavailable";
-
+      if (!value) return "Publication date unavailable";
       const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "Timestamp unavailable";
-
+      if (Number.isNaN(date.getTime())) return "Publication date unavailable";
       return date.toLocaleString("en-US", {
         dateStyle: "medium",
         timeStyle: "short",
@@ -1071,158 +1230,26 @@
       }) + " UTC";
     }
 
-    function dataStatus(value) {
-      const status = String(value || "").toLowerCase();
-
-      if (status.includes("real")) return "Real-time";
-      if (status.includes("delay")) return "Delayed";
-      if (status.includes("end")) return "End of day";
-      if (status.includes("eod")) return "End of day";
-
-      return value || "Status unverified";
-    }
-
-    function renderTicker(markets) {
-      const list = Array.isArray(markets) ? markets.slice(0, 10) : [];
-
-      if (!list.length) {
-        $("ticker-items").innerHTML =
-          '<span class="loading">No verified market quotes currently available.</span>';
-        return;
-      }
-
-      $("ticker-items").innerHTML = list.map(item => `
-        <div class="ticker-item">
-          <strong>${escapeHTML(item.symbol || item.name || "Market")}</strong>
-          <span>${escapeHTML(formatPrice(item.price, item.currency))}</span>
-          <span class="${changeClass(item.change_percent)}">
-            ${escapeHTML(formatChange(item.change_percent))}
-          </span>
-        </div>
-      `).join("");
-    }
-
-    function renderMarketCard(item) {
-      const name = item.name || item.symbol || "Market";
-      const symbol = item.symbol || "";
-      const price = formatPrice(item.price, item.currency);
-      const status = dataStatus(item.status);
-
-      return `
-        <article class="market-card">
-          <div class="symbol">${escapeHTML(symbol)}</div>
-          <h3>${escapeHTML(name)}</h3>
-          <div class="market-price">${escapeHTML(price)}</div>
-          <div class="market-change ${changeClass(item.change_percent)}">
-            ${escapeHTML(formatChange(item.change_percent))}
-          </div>
-          <div class="market-meta">
-            <span>${escapeHTML(item.exchange || "Exchange unavailable")}</span>
-            <span class="market-status">${escapeHTML(status)}</span>
-          </div>
-        </article>
-      `;
-    }
-
-    function renderMarkets(data) {
-      const groups = data && Array.isArray(data.regions) ? data.regions : [];
-
-      if (!groups.length) {
-        $("global-markets").innerHTML =
-          '<p class="loading">Global market quotes are not currently available. No prices have been substituted.</p>';
-        $("market-updated").textContent = "No verified market data";
-        renderTicker([]);
-        return;
-      }
-
-      $("global-markets").innerHTML = groups.map(region => {
-        const items = Array.isArray(region.markets) ? region.markets : [];
-
-        return `
-          <div class="market-region">
-            <div class="region-title">${escapeHTML(region.name || "Global Markets")}</div>
-            <div class="market-grid">
-              ${items.length
-                ? items.map(renderMarketCard).join("")
-                : '<p class="loading">No available quotes for this region.</p>'}
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      const allMarkets = groups.flatMap(region =>
-        Array.isArray(region.markets) ? region.markets : []
-      );
-
-      renderTicker(allMarkets);
-
-      $("market-updated").textContent =
-        data.updated_at ? `Updated ${formatTimestamp(data.updated_at)}` :
-        "Update timestamp unavailable";
-    }
-
-    function renderMovers(items, target) {
-      if (!Array.isArray(items) || !items.length) {
-        $(target).innerHTML =
-          '<tr><td colspan="3" class="empty-row">No verified mover data available.</td></tr>';
-        return;
-      }
-
-      $(target).innerHTML = items.slice(0, 8).map(item => `
-        <tr>
-          <td>
-            <strong>${escapeHTML(item.symbol || "—")}</strong>
-            <br>
-            <span style="color:var(--muted)">
-              ${escapeHTML(item.name || "")}
-            </span>
-          </td>
-          <td class="number">${escapeHTML(formatPrice(item.price, item.currency))}</td>
-          <td class="number ${changeClass(item.change_percent)}">
-            ${escapeHTML(formatChange(item.change_percent))}
-          </td>
-        </tr>
-      `).join("");
-    }
-
-    function renderAssets(items) {
-      if (!Array.isArray(items) || !items.length) {
-        $("asset-grid").innerHTML =
-          '<div class="asset-card"><h3>Data unavailable</h3><p class="loading">No verified currency or commodity quotes are currently available.</p></div>';
-        return;
-      }
-
-      $("asset-grid").innerHTML = items.map(item => `
-        <article class="asset-card">
-          <div class="eyebrow">${escapeHTML(item.type || "Market reference")}</div>
-          <h3>${escapeHTML(item.name || item.symbol || "Asset")}</h3>
-          <div class="asset-value">
-            ${escapeHTML(formatPrice(item.price, item.currency))}
-          </div>
-          <div class="asset-change ${changeClass(item.change_percent)}">
-            ${escapeHTML(formatChange(item.change_percent))}
-          </div>
-          <div class="market-meta">
-            <span>${escapeHTML(item.symbol || "")}</span>
-            <span>${escapeHTML(dataStatus(item.status))}</span>
-          </div>
-        </article>
-      `).join("");
+    async function fetchJSON(url) {
+      const response = await fetch(url, {
+        headers: { "Accept": "application/json" },
+        cache: "no-store",
+        credentials: "same-origin"
+      });
+      if (!response.ok) throw new Error("Request failed: " + response.status);
+      return response.json();
     }
 
     function renderNews(articles) {
+      const target = $("live-stories");
       if (!Array.isArray(articles) || !articles.length) {
-        $("live-stories").innerHTML =
-          '<p class="loading">No approved stories are currently available. Please check back later.</p>';
+        target.innerHTML = '<p class="loading">No approved stories are currently available. Please check back later.</p>';
         return;
       }
 
-      $("live-stories").innerHTML = articles.slice(0, 12).map(article => {
+      target.innerHTML = articles.slice(0, 12).map(article => {
         const url = safeURL(article.url);
-        const published = article.published
-          ? formatTimestamp(article.published)
-          : "Publication date unavailable";
-
+        const published = formatTimestamp(article.published);
         return `
           <article class="news-card">
             <div class="news-category">${escapeHTML(article.category || "Market Briefing")}</div>
@@ -1238,59 +1265,21 @@
     }
 
     function renderEconomic(items) {
+      const target = $("economic-grid");
       if (!Array.isArray(items) || !items.length) {
-        $("economic-grid").innerHTML =
-          '<p class="loading">No verified economic indicators are currently available.</p>';
+        target.innerHTML = '<p class="loading">No verified economic indicators are currently available.</p>';
         return;
       }
 
-      $("economic-grid").innerHTML = items.slice(0, 12).map(item => `
+      target.innerHTML = items.slice(0, 12).map(item => `
         <article class="economic-card">
           <div class="eyebrow">${escapeHTML(item.country || item.region || "Global")}</div>
           <h3>${escapeHTML(item.name || "Economic Indicator")}</h3>
-          <div class="economic-value">
-            ${escapeHTML(item.value ?? "—")}
-            ${escapeHTML(item.unit || "")}
-          </div>
-          <p>
-            ${escapeHTML(item.period || "Period unavailable")}
-            · ${escapeHTML(item.source || "Source unavailable")}
-          </p>
+          <div class="economic-value">${escapeHTML(item.value ?? "—")} ${escapeHTML(item.unit || "")}</div>
+          <p>${escapeHTML(item.period || "Period unavailable")} · ${escapeHTML(item.source || "Source unavailable")}</p>
+          <p>${escapeHTML(item.description || "")}</p>
         </article>
       `).join("");
-    }
-
-    async function fetchJSON(url) {
-      const response = await fetch(url, {
-        headers: { "Accept": "application/json" },
-        cache: "no-store"
-      });
-
-      if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`);
-      }
-
-      return response.json();
-    }
-
-    async function loadMarkets() {
-      try {
-        const data = await fetchJSON(API.markets);
-
-        renderMarkets(data);
-        renderMovers(data.gainers, "top-gainers");
-        renderMovers(data.decliners, "top-decliners");
-        renderAssets(data.assets);
-      } catch (error) {
-        console.warn("Market data unavailable:", error);
-
-        $("global-markets").innerHTML =
-          '<p class="loading">Market data service is not connected yet. No sample prices are being displayed.</p>';
-
-        $("market-updated").textContent = "Market data service unavailable";
-        $("ticker-items").innerHTML =
-          '<span class="loading">Awaiting market data service.</span>';
-      }
     }
 
     async function loadBriefing() {
@@ -1298,18 +1287,8 @@
         const data = await fetchJSON(API.briefing);
         renderNews(data.articles || []);
       } catch (error) {
-        console.warn("Briefing API unavailable:", error);
-
-        try {
-          const fallback = await fetchJSON("/data/published-news.json");
-          const articles = (fallback.articles || []).filter(
-            article => article.status === "published"
-          );
-          renderNews(articles);
-        } catch (_) {
-          $("live-stories").innerHTML =
-            '<p class="loading">The briefing service is not connected yet.</p>';
-        }
+        console.warn("Briefing service unavailable:", error);
+        $("live-stories").innerHTML = '<p class="loading">The briefing service is temporarily unavailable.</p>';
       }
     }
 
@@ -1318,33 +1297,28 @@
         const data = await fetchJSON(API.economic);
         renderEconomic(data.indicators || []);
       } catch (error) {
-        console.warn("Economic data API unavailable:", error);
-
-        try {
-          const fallback = await fetchJSON("/data/latest-news.json");
-          renderEconomic(fallback.economic_data || []);
-        } catch (_) {
-          $("economic-grid").innerHTML =
-            '<p class="loading">Economic data service is not connected yet.</p>';
-        }
+        console.warn("Economic data service unavailable:", error);
+        $("economic-grid").innerHTML = '<p class="loading">Economic data service is temporarily unavailable.</p>';
       }
     }
 
     function initializePage() {
       const now = new Date();
-
       $("current-date").textContent = now.toLocaleDateString("en-US", {
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric"
       }).toUpperCase();
-
       $("year").textContent = now.getFullYear();
-
-      loadMarkets();
       loadBriefing();
       loadEconomic();
+      // Refresh approved editorial content and published economic observations
+      // while the page remains open; the collector itself runs five times daily.
+      window.setInterval(() => {
+        loadBriefing();
+        loadEconomic();
+      }, 15 * 60 * 1000);
     }
 
     initializePage();

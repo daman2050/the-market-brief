@@ -1,43 +1,41 @@
-
 name: The Market Brief - Daily News
-
 on:
   schedule:
-    - cron: "0 11 * * 1-5"
+    # Five refreshes daily, spaced three hours apart (UTC).
+    # GitHub Actions schedules run from the default branch after this PR is merged.
+    - cron: "17 11,14,17,20,23 * * *"
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
+concurrency:
+  group: market-brief-collector
+  cancel-in-progress: false
 jobs:
   collect-news:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
     steps:
-      - name: Get repository files
+      - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
+          cache: "pip"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests feedparser
-
-      - name: Run news automation
+      - name: Verify ingestion configuration
+        env:
+          MARKET_BRIEF_API_URL: ${{ vars.MARKET_BRIEF_API_URL }}
+          MARKET_BRIEF_INGEST_SECRET: ${{ secrets.MARKET_BRIEF_INGEST_SECRET }}
         run: |
-          python scripts/daily_news.py
-
-      - name: Save updated news
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/latest-news.json
-          git diff --cached --quiet || git commit -m "Update daily financial news"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          test -n "$MARKET_BRIEF_API_URL" || (echo "Missing repository variable MARKET_BRIEF_API_URL" && exit 1)
+          test -n "$MARKET_BRIEF_INGEST_SECRET" || (echo "Missing repository secret MARKET_BRIEF_INGEST_SECRET" && exit 1)
+      - name: Collect and send drafts to the private editorial API
+        env:
+          MARKET_BRIEF_API_URL: ${{ vars.MARKET_BRIEF_API_URL }}
+          MARKET_BRIEF_INGEST_SECRET: ${{ secrets.MARKET_BRIEF_INGEST_SECRET }}
+          SEC_USER_AGENT: ${{ vars.SEC_USER_AGENT }}
+        run: python scripts/daily_news.py

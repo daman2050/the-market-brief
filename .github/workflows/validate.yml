@@ -1,0 +1,63 @@
+name: Validate The Market Brief
+on:
+  push:
+    branches: [main, "build/**"]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check Worker JavaScript
+        run: node --check src/index.js
+      - name: Compile Python collector
+        run: python -m py_compile scripts/daily_news.py
+      - name: Validate inline page scripts
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+
+          for source, output in [
+              ("public/index.html", "/tmp/public-inline.js"),
+              ("public/admin/index.html", "/tmp/admin-inline.js"),
+          ]:
+              html = Path(source).read_text(encoding="utf-8")
+              scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", html, re.I | re.S)
+              candidates = [s for s in scripts if "use strict" in s]
+              assert candidates, f"No application script found in {source}"
+              Path(output).write_text(candidates[-1], encoding="utf-8")
+          print("Inline application scripts extracted.")
+          PY
+          node --check /tmp/public-inline.js
+          node --check /tmp/admin-inline.js
+      - name: Apply D1 migration to in-memory SQLite
+        run: |
+          python - <<'PY'
+          import sqlite3
+          from pathlib import Path
+
+          db = sqlite3.connect(":memory:")
+          db.executescript(Path("migrations/0001_initial.sql").read_text(encoding="utf-8"))
+          article_count = db.execute("SELECT COUNT(*) FROM articles WHERE status='published'").fetchone()[0]
+          indicator_count = db.execute("SELECT COUNT(*) FROM economic_indicators").fetchone()[0]
+          db.execute("SELECT COUNT(*) FROM login_attempts")
+          assert article_count == 1, article_count
+          assert indicator_count == 3, indicator_count
+          print(f"Migration OK: {article_count} published article, {indicator_count} economic indicators, login throttling table present.")
+          PY
+      - name: Check private drafts are not in public assets
+        run: |
+          test ! -e public/data/latest-news.json
+          test ! -e data/latest-news.json
+          test ! -e data/published-news.json
