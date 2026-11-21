@@ -3,65 +3,93 @@
 Global stock-market intelligence with public market widgets, official economic indicators, a reviewed news briefing, and a private editorial desk.
 
 ## Architecture
-- Public website: static assets in \`public/\`, served by Cloudflare Workers.
+- Public website: static assets in `public/`, served by Cloudflare Workers.
 - Market prices: TradingView embedded widgets. Prices are supplied directly by TradingView; they are not scraped or stored by this project. Coverage and delays vary by instrument and exchange.
-- News collection: \`scripts/daily_news.py\` collects institutional feeds and SEC filing announcements.
-- Private ingestion: GitHub Actions sends collected material to \`POST /api/ingest\` with a bearer secret.
+- News collection: `scripts/daily_news.py` collects institutional feeds and SEC filing announcements.
+- Private ingestion: GitHub Actions sends collected material to `POST /api/ingest` with a bearer secret.
 - Editorial database: Cloudflare D1 stores draft, published, and rejected articles plus economic indicators.
 - Public APIs: only approved articles and economic indicators are exposed.
-- Editorial desk: \`/admin/\`, protected by a password and signed HTTP-only session cookie.
+- Editorial desk: `/admin/`, protected by a password and signed HTTP-only session cookie.
 
-## Cloudflare setup
-The D1 database configured here is \`market-brief-db\` with ID \`8750870d-d5cb-4c58-b2e9-bfb68783ce8e\`.
+## Cloudflare preview setup
 
-1. Install Node.js LTS, then install and authenticate Wrangler:
-   \`\`\`powershell
+The branch preview uses a separate D1 database so preview testing cannot change production data.
+
+- Preview database: `market-brief-preview-db`
+- Preview database ID: `a181e798-1e94-4a90-b0f9-814af03cca50`
+- Production database: `market-brief-db` (ID `8750870d-d5cb-4c58-b2e9-bfb68783ce8e`)
+
+The preview binding in `wrangler.toml` and the migration-only file `wrangler.preview-migrations.toml` both point to the preview database. The migration-only file deliberately contains no production database ID.
+
+1. Install Node.js LTS and authenticate Wrangler:
+   ```powershell
    npm install -g wrangler
    npx wrangler login
-   \`\`\`
-2. From the repository root, apply the D1 migration:
-   \`\`\`powershell
+   ```
+2. From the repository root, apply migrations to the preview database only:
+   ```powershell
+   npx wrangler d1 migrations apply PREVIEW_DB --remote --config wrangler.preview-migrations.toml
+   ```
+3. Confirm the migration status against that same preview database:
+   ```powershell
+   npx wrangler d1 migrations list PREVIEW_DB --remote --config wrangler.preview-migrations.toml
+   ```
+4. After the migrations succeed, update the branch preview from this branch using:
+   ```powershell
+   npx wrangler preview
+   ```
+   If GitHub Workers Builds manages the preview deployment, pushing this branch will trigger its preview build instead.
+5. Test the preview's `/api/health`, `/api/public/briefing`, and `/api/public/economic` endpoints.
+
+Do not substitute the production database name or remove the preview migration config when applying preview migrations.
+
+## Production Cloudflare setup
+
+The production D1 database is `market-brief-db` with ID `8750870d-d5cb-4c58-b2e9-bfb68783ce8e`. The following commands target production and should only be run when intentionally setting up or updating the production environment:
+
+1. Apply production migrations:
+   ```powershell
    npx wrangler d1 migrations apply market-brief-db --remote
-   \`\`\`
-3. Set three Worker secrets (use separate, strong random values; do not commit them):
-   \`\`\`powershell
+   ```
+2. Set three Worker secrets (use separate, strong random values; do not commit them):
+   ```powershell
    npx wrangler secret put ADMIN_PASSWORD
    npx wrangler secret put INGEST_SECRET
    npx wrangler secret put SESSION_SECRET
-   \`\`\`
-4. Deploy:
-   \`\`\`powershell
+   ```
+3. Deploy production:
+   ```powershell
    npx wrangler deploy
-   \`\`\`
-5. Test \`https://YOUR-WORKER-DOMAIN/api/health\`, \`/api/public/briefing\`, and \`/api/public/economic\`.
-6. Open \`https://YOUR-WORKER-DOMAIN/admin/\` and sign in.
+   ```
+4. Test `https://YOUR-WORKER-DOMAIN/api/health`, `/api/public/briefing`, and `/api/public/economic`.
+5. Open `https://YOUR-WORKER-DOMAIN/admin/` and sign in.
 
 ## GitHub Actions setup
 In repository Settings → Secrets and variables → Actions, add:
 
 Repository variables:
-- \`MARKET_BRIEF_API_URL\`: Worker origin, e.g. \`https://the-market-brief.YOUR-SUBDOMAIN.workers.dev\` (no trailing slash).
-- \`SEC_USER_AGENT\`: descriptive user agent with a monitored contact email.
+- `MARKET_BRIEF_API_URL`: Worker origin, e.g. `https://the-market-brief.YOUR-SUBDOMAIN.workers.dev` (no trailing slash).
+- `SEC_USER_AGENT`: descriptive user agent with a monitored contact email.
 
 Repository secret:
-- \`MARKET_BRIEF_INGEST_SECRET\`: exactly the Worker \`INGEST_SECRET\` value.
+- `MARKET_BRIEF_INGEST_SECRET`: exactly the Worker `INGEST_SECRET` value.
 
 The weekday collector sends drafts and economic data to the private Worker API. It no longer commits collector output or draft stories to the public repository.
 
 ## Optional automatic deployment
-The \`.github/workflows/deploy-worker.yml\` workflow deploys when Worker files change on \`main\`. Add:
-- Secret \`CLOUDFLARE_API_TOKEN\` with Workers Scripts edit and D1 edit permissions.
-- Variable \`CLOUDFLARE_ACCOUNT_ID\`.
+The `.github/workflows/deploy-worker.yml` workflow deploys when Worker files change on `main`. Add:
+- Secret `CLOUDFLARE_API_TOKEN` with Workers Scripts edit and D1 edit permissions.
+- Variable `CLOUDFLARE_ACCOUNT_ID`.
 
 Until these are configured, deploy manually using Wrangler.
 
 ## Editorial workflow
 1. The collector submits source material as drafts.
-2. Sign in at \`/admin/\`.
+2. Sign in at `/admin/`.
 3. Open the original source and verify facts, dates, and relevance.
 4. Edit the headline and write an original, accurate summary with context.
 5. Approve only after review. Rejected stories stay off the public site.
-6. The public briefing API returns only rows with status \`published\`.
+6. The public briefing API returns only rows with status `published`.
 
 A filing announcement is not itself an explanation of a company's financial position. Do not publish generic filler as analysis.
 
