@@ -41,3 +41,11 @@ INSERT INTO economic_indicators(series_id,name,country,value,unit,period,source,
 ('LNS14000000','Unemployment Rate','United States','4.1','Percent','October 2026','Bureau of Labor Statistics','Civilian unemployment rate, seasonally adjusted.','2026-11-20T00:00:00+00:00'),
 ('CES0000000001','Nonfarm Payrolls','United States','159293','Thousands of jobs','October 2026','Bureau of Labor Statistics','Total nonfarm employees, seasonally adjusted.','2026-11-20T00:00:00+00:00')
 ON CONFLICT(series_id) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS login_attempts (
+ ip_hash TEXT PRIMARY KEY,
+ attempts INTEGER NOT NULL DEFAULT 0,
+ window_started_at TEXT NOT NULL,
+ locked_until TEXT,
+ updated_at TEXT NOT NULL
+);
