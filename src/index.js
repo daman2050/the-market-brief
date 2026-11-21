@@ -41,7 +41,22 @@ async function route(req,env){
  if(p==="/api/public/briefing"&&req.method==="GET")return publicBriefing(env);
  if(p==="/api/public/economic"&&req.method==="GET")return publicEconomic(env);
  if(p==="/api/ingest"&&req.method==="POST")return ingest(req,env);
- if(p==="/api/admin/login"&&req.method==="POST"){if(!sameOrigin(req))return error("Request origin rejected.",403);if(!env.ADMIN_PASSWORD||!env.SESSION_SECRET)return error("Admin authentication is not configured.",503);let d;try{d=await readJson(req,4096)}catch{return error("Invalid request.")}const pass=String(d.password||"");if(pass.length>256||pass!==env.ADMIN_PASSWORD)return error("Incorrect password.",401);return json({ok:true,expires_in:SESSION_SECONDS},200,{"Set-Cookie":cookie(await createSession(env))})}
+ if(p==="/api/admin/login"&&req.method==="POST"){if(!sameOrigin(req))return error("Request origin rejected.",403);if(!env.ADMIN_PASSWORD||!env.SESSION_SECRET)return error("Admin authentication is not configured.",503);let d;try{d=await readJson(req,4096)}catch{return error("Invalid request.")}const pass=String(d.password||"");if(pass.length>256)return error("Incorrect password.",401);
+ const ip=req.headers.get("CF-Connecting-IP")||"unknown";
+ const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(ip));
+ const ipHash=Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+ const nowMs=Date.now(),nowIso=new Date(nowMs).toISOString();
+ const attempt=await env.DB.prepare("SELECT attempts,window_started_at,locked_until FROM login_attempts WHERE ip_hash=?").bind(ipHash).first();
+ if(attempt?.locked_until&&Date.parse(attempt.locked_until)>nowMs)return error("Too many attempts. Try again in 15 minutes.",429);
+ if(pass!==env.ADMIN_PASSWORD){
+   const windowValid=attempt?.window_started_at&&nowMs-Date.parse(attempt.window_started_at)<15*60*1000;
+   const count=windowValid?(attempt.attempts||0)+1:1;
+   const locked=count>=5?new Date(nowMs+15*60*1000).toISOString():null;
+   await env.DB.prepare("INSERT INTO login_attempts(ip_hash,attempts,window_started_at,locked_until,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(ip_hash) DO UPDATE SET attempts=excluded.attempts,window_started_at=excluded.window_started_at,locked_until=excluded.locked_until,updated_at=excluded.updated_at").bind(ipHash,count,windowValid?attempt.window_started_at:nowIso,locked,nowIso).run();
+   return error(locked?"Too many attempts. Try again in 15 minutes.":"Incorrect password.",locked?429:401);
+ }
+ await env.DB.prepare("DELETE FROM login_attempts WHERE ip_hash=?").bind(ipHash).run();
+ return json({ok:true,expires_in:SESSION_SECONDS},200,{"Set-Cookie":cookie(await createSession(env))})}
  if(p==="/api/admin/logout"&&req.method==="POST"){if(!sameOrigin(req))return error("Request origin rejected.",403);return json({ok:true},200,{"Set-Cookie":cookie("",0)})}
  if(p.startsWith("/api/admin/")){const auth=await requireAdmin(req,env);if(auth)return auth;if(p==="/api/admin/me"&&req.method==="GET")return json({authenticated:true});if(p==="/api/admin/overview"&&req.method==="GET")return overview(env);if(p==="/api/admin/articles"&&req.method==="GET")return adminArticles(u,env);const m=p.match(/^\/api\/admin\/articles\/(\d+)(?:\/(approve|reject|restore))?$/);if(m){const id=Number(m[1]),action=m[2];if(!Number.isSafeInteger(id)||id<1)return error("Invalid article ID.");if(req.method==="PATCH"&&!action)return updateArticle(req,id,env);if(req.method==="POST"&&action)return actionArticle(id,action,env);if(req.method==="DELETE"&&!action){const r=await env.DB.prepare("DELETE FROM articles WHERE id=?").bind(id).run();return r.meta?.changes?json({ok:true}):error("Article not found.",404)}}return error("Admin endpoint not found.",404)}
  if(p==="/admin"||p==="/admin/")return env.ASSETS.fetch(new Request(new URL("/admin/index.html",req.url),req));
