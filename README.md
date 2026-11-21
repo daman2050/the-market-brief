@@ -65,23 +65,27 @@ The production D1 database is `market-brief-db` with ID `8750870d-d5cb-4c58-b2e9
 5. Open `https://YOUR-WORKER-DOMAIN/admin/` and sign in.
 
 ## GitHub Actions setup
-In repository Settings → Secrets and variables → Actions, add:
+
+In repository Settings → Secrets and variables → Actions, add the following.
 
 Repository variables:
-- `MARKET_BRIEF_API_URL`: Worker origin, e.g. `https://the-market-brief.YOUR-SUBDOMAIN.workers.dev` (no trailing slash).
-- `SEC_USER_AGENT`: descriptive user agent with a monitored contact email.
+- `MARKET_BRIEF_API_URL`: for initial testing, use the preview Worker origin `https://build-full-platform-2026-11-the-market-brief.dev-safss.workers.dev` (no trailing slash). Change this to the production Worker origin only after production has been deployed and its APIs have been tested.
+- `SEC_USER_AGENT`: a descriptive user agent with a monitored contact email.
 
 Repository secret:
-- `MARKET_BRIEF_INGEST_SECRET`: exactly the Worker `INGEST_SECRET` value.
+- `MARKET_BRIEF_INGEST_SECRET`: this must exactly match the `INGEST_SECRET` configured on the Worker identified by `MARKET_BRIEF_API_URL`. For preview testing, use the preview Worker secret. Never paste secret values into source code, issues, or chat.
 
-The collector is scheduled five times every day at 11:17, 14:17, 17:17, 20:17, and 23:17 UTC (approximately three hours apart). GitHub Actions uses UTC; these times shift relative to U.S. local time when daylight saving time changes. The schedule becomes active after the workflow is merged into the default branch. Each run sends newly collected stories and economic observations to the private Worker API as drafts; it does not automatically publish stories. An editor must verify and approve each story before it appears publicly. The collector no longer commits collector output or draft stories to the public repository.
+Before manually running the collector, verify that the API URL and ingest secret point to the same environment. The collector sends articles and economic observations as drafts; it never automatically publishes them.
 
-## Optional automatic deployment
-The `.github/workflows/deploy-worker.yml` workflow deploys when Worker files change on `main`. Add:
-- Secret `CLOUDFLARE_API_TOKEN` with Workers Scripts edit and D1 edit permissions.
-- Variable `CLOUDFLARE_ACCOUNT_ID`.
+The collector is scheduled five times every day at 11:17, 14:17, 17:17, 20:17, and 23:17 UTC (approximately three hours apart). GitHub Actions uses UTC; these times shift relative to U.S. local time when daylight saving time changes. The schedule is active because this workflow is now on the default branch. Each run sends newly collected stories and economic observations to the private Worker API as drafts. An editor must verify and approve each story before it appears publicly. The collector no longer commits collector output or draft stories to the public repository.
 
-Until these are configured, deploy manually using Wrangler.
+## Automatic production deployment
+
+The `.github/workflows/deploy-worker.yml` workflow runs when Worker files change on `main` and can also be started manually. It applies migrations to the production D1 database before deploying the Worker. Configure these repository credentials only when you are ready for production deployment:
+- Secret `CLOUDFLARE_API_TOKEN`: a narrowly scoped Cloudflare token with the required Workers Scripts edit and D1 edit permissions.
+- Variable `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account ID.
+
+Keep the token in GitHub Actions secrets, never in the repository. Cloudflare requires an API token and account ID for non-interactive GitHub Actions deployments. Until these are configured, automatic production deployment will fail; the preview Worker remains separate.
 
 ## Editorial workflow
 1. The collector submits source material as drafts.
