@@ -842,6 +842,11 @@ def main():
 
     api_success = send_to_api(payload)
 
+    if (API_URL or INGEST_SECRET) and not api_success:
+        raise RuntimeError(
+            "Private API ingestion was configured but did not complete successfully."
+        )
+
     # --------------------------------------------------------
     # 8. Summary
     # --------------------------------------------------------
