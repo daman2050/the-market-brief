@@ -1,4 +1,16 @@
+
 {
-  "last_updated": null,
-  "articles": []
+  "last_updated": "2026-11-21T02:15:00Z",
+  "articles": [
+    {
+      "title": "10-Q - HOME DEPOT, INC. (0000354950) (Filer)",
+      "summary": "Home Depot filed a quarterly report with the SEC on November 20, 2026. Review the original filing for the company's financial statements, business updates, and disclosures.",
+      "source": "SEC Form 10-Q Filings",
+      "category": "SEC Company Filing",
+      "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/0001628280-26-075287-index.htm",
+      "published": "2026-11-20T21:21:23+00:00",
+      "status": "published",
+      "filing_type": "10-Q"
+    }
+  ]
 }
