@@ -15,4 +15,5 @@ migrations_dir = "migrations"
 
 [[previews.d1_databases]]
 binding = "DB"
+database_name = "market-brief-preview-db"
 database_id = "a181e798-1e94-4a90-b0f9-814af03cca50"
