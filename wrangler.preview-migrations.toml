@@ -1,0 +1,7 @@
+# Migration-only configuration for the isolated Cloudflare preview database.
+# This file intentionally contains NO production database ID.
+[[d1_databases]]
+binding = "PREVIEW_DB"
+database_name = "market-brief-preview-db"
+database_id = "a181e798-1e94-4a90-b0f9-814af03cca50"
+migrations_dir = "migrations"
