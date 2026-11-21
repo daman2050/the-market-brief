@@ -631,6 +631,45 @@
       line-height: 1.9;
     }
 
+
+    /* COMMERCIAL PARTNERSHIPS */
+    .partnership-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin: 44px 0 28px;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      background: var(--paper-light);
+    }
+    .partnership-panel h2 {
+      margin: 8px 0 10px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.45rem, 2.6vw, 2rem);
+      font-weight: 500;
+    }
+    .partnership-panel p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .partnership-link {
+      flex: 0 0 auto;
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 7px;
+    }
+    .partnership-link span { color: var(--gold); margin-left: 5px; }
+    @media (max-width: 680px) {
+      .partnership-panel { align-items: flex-start; flex-direction: column; padding: 24px; }
+    }
+
     /* DISCLOSURE */
 
     .disclosure {
@@ -1089,10 +1128,25 @@
         </p>
       </section>
 
+
+      <section class="partnership-panel" aria-labelledby="partnership-title">
+        <div>
+          <div class="eyebrow">Commercial Partnerships</div>
+          <h2 id="partnership-title">Reach an audience that follows the markets.</h2>
+          <p>
+            The Market Brief welcomes relevant advertising, clearly identified sponsorships,
+            and carefully selected commercial partnerships. Editorial coverage remains independent.
+          </p>
+        </div>
+        <a class="partnership-link" href="mailto:themarketbrief@gmail.com?subject=The%20Market%20Brief%20Partnership%20Inquiry">
+          Discuss a partnership <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
       <div class="disclosure" id="disclosure">
         <strong>Data & Editorial Disclosure</strong>
         <p>
-          Market widgets and quotes are provided by TradingView. Data availability and timing vary by exchange and instrument; some prices may be delayed or end-of-day. TradingView branding and source links are retained. Economic indicators are sourced from the agencies identified on each card. News and commentary are for general educational and informational purposes only and do not constitute investment advice.
+          Market widgets and quotes are provided by TradingView. Data availability and timing vary by exchange and instrument; some prices may be delayed or end-of-day. TradingView branding and source links are retained. Economic indicators are sourced from the agencies identified on each card. News and commentary are for general educational and informational purposes only and do not constitute investment advice. Any paid placements, sponsored content, or affiliate relationships will be clearly identified. Commercial relationships do not determine editorial coverage, and compensation does not guarantee favorable coverage.
         </p>
       </div>
 
@@ -1125,6 +1179,7 @@
           <a href="mailto:themarketbrief@gmail.com">Contact</a>
           <a href="#disclosure">Data Disclosure</a>
           <a href="/admin/">Editorial Desk</a>
+          <a href="mailto:themarketbrief@gmail.com?subject=The%20Market%20Brief%20Partnership%20Inquiry">Advertising & Partnerships</a>
         </div>
       </div>
 
