@@ -1313,6 +1313,12 @@
       $("year").textContent = now.getFullYear();
       loadBriefing();
       loadEconomic();
+      // Refresh approved editorial content and published economic observations
+      // while the page remains open; the collector itself runs five times daily.
+      window.setInterval(() => {
+        loadBriefing();
+        loadEconomic();
+      }, 15 * 60 * 1000);
     }
 
     initializePage();
