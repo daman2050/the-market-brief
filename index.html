@@ -2,11 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#11120f">
 <meta name="description" content="The Market Brief — an intelligent daily read on markets, business and the forces shaping tomorrow.">
-
 <title>The Market Brief | A clearer view of the markets</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,14 +26,8 @@
   --max: 1180px;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--paper);
@@ -42,18 +35,8 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.wrap {
-  width: min(var(--max), calc(100% - 48px));
-  margin: auto;
-}
-
-/* ANNOUNCEMENT */
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(var(--max), calc(100% - 48px)); margin: auto; }
 
 .announcement {
   background: var(--ink);
@@ -64,31 +47,16 @@ a {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+.announcement b { color: #d5b77b; }
 
-.announcement b {
-  color: #d5b77b;
-}
-
-/* NAVIGATION */
-
-.header {
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-
+.header { border-bottom: 1px solid var(--line); }
 .nav {
   height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
+.brand { display: flex; align-items: center; gap: 12px; }
 .monogram {
   height: 37px;
   width: 37px;
@@ -98,12 +66,7 @@ a {
   font: 600 23px var(--serif);
   color: var(--gold);
 }
-
-.brandname {
-  font: 700 17px var(--serif);
-  letter-spacing: 1.6px;
-}
-
+.brandname { font: 700 17px var(--serif); letter-spacing: 1.6px; }
 .brandtag {
   display: block;
   font-size: 8px;
@@ -111,7 +74,6 @@ a {
   color: #77746a;
   margin-top: 3px;
 }
-
 .links {
   display: flex;
   gap: 30px;
@@ -120,11 +82,7 @@ a {
   text-transform: uppercase;
   color: #59594f;
 }
-
-.links a:hover {
-  color: #9a7b45;
-}
-
+.links a:hover { color: #9a7b45; }
 .navbtn {
   border: 1px solid var(--ink);
   padding: 12px 17px;
@@ -133,13 +91,7 @@ a {
   text-transform: uppercase;
   font-weight: 700;
 }
-
-.navbtn:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* HERO */
+.navbtn:hover { background: var(--ink); color: var(--paper); }
 
 .hero {
   padding: 75px 0 65px;
@@ -148,41 +100,27 @@ a {
   gap: 70px;
   align-items: center;
 }
-
-.eyebrow {
+.eyebrow, .sectiontag {
   font-size: 9px;
   letter-spacing: 2.6px;
   text-transform: uppercase;
   color: #947849;
   font-weight: 700;
 }
-
 .hero h1 {
   font: 500 clamp(48px, 6.4vw, 79px)/1.02 var(--serif);
   letter-spacing: -2.8px;
   margin: 20px 0 21px;
   max-width: 650px;
 }
-
-.hero h1 i {
-  font-weight: 500;
-  color: #9e8556;
-}
-
+.hero h1 i { font-weight: 500; color: #9e8556; }
 .hero p {
   font-size: 14px;
   line-height: 1.9;
   color: #65645b;
   max-width: 490px;
 }
-
-.actions {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin-top: 30px;
-}
-
+.actions { display: flex; gap: 24px; align-items: center; margin-top: 30px; }
 .primary {
   display: inline-block;
   background: var(--ink);
@@ -192,13 +130,7 @@ a {
   letter-spacing: 1.6px;
   text-transform: uppercase;
   font-weight: 700;
-  border: 1px solid var(--ink);
 }
-
-.primary:hover {
-  background: #34352d;
-}
-
 .underlink {
   font-size: 10px;
   text-transform: uppercase;
@@ -206,14 +138,7 @@ a {
   border-bottom: 1px solid var(--gold);
   padding-bottom: 5px;
 }
-
-.note {
-  font-size: 9px !important;
-  color: #98958a !important;
-  margin-top: 20px;
-}
-
-/* FEATURED COVER */
+.note { font-size: 9px !important; color: #98958a !important; margin-top: 20px; }
 
 .cover {
   background: #20221d;
@@ -223,21 +148,15 @@ a {
   position: relative;
   overflow: hidden;
 }
-
 .cover:before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 80% 20%, #6b6141 0, transparent 34%),
-    linear-gradient(140deg, transparent 40%, #b89b621b 100%);
+  background: radial-gradient(ellipse at 80% 20%, #6b6141 0, transparent 34%),
+  linear-gradient(140deg, transparent 40%, #b89b621b 100%);
 }
-
-.cover > * {
-  position: relative;
-}
-
-.covermeta {
+.cover > * { position: relative; }
+.covermeta, .coverfoot {
   display: flex;
   justify-content: space-between;
   color: #c4bca9;
@@ -245,92 +164,21 @@ a {
   letter-spacing: 1.7px;
   text-transform: uppercase;
 }
+.coverrule { height: 1px; background: #77705c; margin: 19px 0 30px; }
+.coverlabel { color: #cbb17b; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; }
+.cover h2 { font: 500 39px/1.12 var(--serif); max-width: 340px; margin: 13px 0; }
+.cover p { font-size: 10px; color: #c1bdaf; max-width: 320px; line-height: 1.8; }
+.coverchart { width: 100%; height: 112px; margin-top: 25px; }
+.coverchart path { fill: none; stroke: #c9ad73; stroke-width: 1.5; }
+.coverchart .grid { stroke: #ffffff1c; stroke-width: 1; stroke-dasharray: 3 6; }
+.coverfoot { align-items: end; margin-top: 5px; color: #b8b1a2; }
+.coverfoot strong { font: 500 18px var(--serif); color: #e6d8b9; }
 
-.coverrule {
-  height: 1px;
-  background: #77705c;
-  margin: 19px 0 30px;
-}
-
-.coverlabel {
-  color: #cbb17b;
-  font-size: 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.cover h2 {
-  font: 500 39px/1.12 var(--serif);
-  max-width: 340px;
-  margin: 13px 0;
-}
-
-.cover p {
-  font-size: 10px;
-  color: #c1bdaf;
-  max-width: 320px;
-  line-height: 1.8;
-}
-
-.coverchart {
-  width: 100%;
-  height: 112px;
-  margin-top: 25px;
-}
-
-.coverchart path {
-  fill: none;
-  stroke: #c9ad73;
-  stroke-width: 1.5;
-}
-
-.coverchart .grid {
-  stroke: #ffffff1c;
-  stroke-width: 1;
-  stroke-dasharray: 3 6;
-}
-
-.coverfoot {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin-top: 5px;
-  color: #b8b1a2;
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.coverfoot strong {
-  font: 500 18px var(--serif);
-  color: #e6d8b9;
-}
-
-/* THEMES */
-
-.ticker {
-  background: #e9e4d9;
-  border-block: 1px solid var(--line);
-}
-
-.tickerinner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.tick {
-  padding: 17px 20px;
-  border-right: 1px solid var(--line);
-}
-
-.tick:first-child {
-  padding-left: 0;
-}
-
-.tick:last-child {
-  border: 0;
-}
-
+.ticker { background: #e9e4d9; border-block: 1px solid var(--line); }
+.tickerinner { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tick { padding: 17px 20px; border-right: 1px solid var(--line); }
+.tick:first-child { padding-left: 0; }
+.tick:last-child { border: 0; }
 .tick small {
   display: block;
   color: #8b877a;
@@ -338,24 +186,10 @@ a {
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
+.tick b { display: block; font: 600 17px var(--serif); margin-top: 4px; }
+.tick span { font-size: 9px; color: #8c7954; }
 
-.tick b {
-  display: block;
-  font: 600 17px var(--serif);
-  margin-top: 4px;
-}
-
-.tick span {
-  font-size: 9px;
-  color: #8c7954;
-}
-
-/* GENERAL SECTIONS */
-
-.section {
-  padding: 78px 0;
-}
-
+.section { padding: 78px 0; }
 .sectionhead {
   display: flex;
   justify-content: space-between;
@@ -364,36 +198,10 @@ a {
   padding-bottom: 17px;
   margin-bottom: 26px;
 }
+.sectionhead h2 { font: 500 37px var(--serif); margin: 8px 0 0; }
+.sectionhead p { font-size: 10px; color: #77746a; max-width: 320px; line-height: 1.7; margin: 0; }
 
-.sectionhead h2 {
-  font: 500 37px var(--serif);
-  letter-spacing: -.8px;
-  margin: 8px 0 0;
-}
-
-.sectionhead p {
-  font-size: 10px;
-  color: #77746a;
-  max-width: 320px;
-  line-height: 1.7;
-  margin: 0;
-}
-
-.sectiontag {
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #9a7b45;
-}
-
-/* NEWS */
-
-.stories {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr .8fr;
-  gap: 0;
-}
-
+.stories { display: grid; grid-template-columns: 1.2fr .8fr .8fr; }
 .story {
   padding: 20px 25px;
   border-right: 1px solid var(--line);
@@ -401,35 +209,16 @@ a {
   display: flex;
   flex-direction: column;
 }
-
-.story:first-child {
-  padding-left: 0;
-}
-
-.story:last-child {
-  border: 0;
-  padding-right: 0;
-}
-
+.story:first-child { padding-left: 0; }
+.story:last-child { border: 0; padding-right: 0; }
 .story .category {
   font-size: 8px;
   letter-spacing: 1.7px;
   text-transform: uppercase;
   color: #9b7d4d;
 }
-
-.story h3 {
-  font: 500 23px/1.2 var(--serif);
-  margin: 14px 0 10px;
-}
-
-.story p {
-  font-size: 11px;
-  line-height: 1.8;
-  color: #77746a;
-  margin: 0 0 20px;
-}
-
+.story h3 { font: 500 23px/1.2 var(--serif); margin: 14px 0 10px; }
+.story p { font-size: 11px; line-height: 1.8; color: #77746a; margin: 0 0 20px; }
 .story .meta {
   margin-top: auto;
   padding-top: 13px;
@@ -443,16 +232,11 @@ a {
   color: #8b877c;
   text-transform: uppercase;
 }
-
-.story .source-link {
-  font-size: 8px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.source-link {
   color: #92764a;
   border-bottom: 1px solid var(--gold);
   padding-bottom: 3px;
 }
-
 .briefing-status {
   grid-column: 1 / -1;
   font-size: 12px;
@@ -460,7 +244,6 @@ a {
   color: #77746a;
   padding: 20px 0;
 }
-
 .briefing-updated {
   font-size: 9px;
   letter-spacing: 1px;
@@ -468,6 +251,27 @@ a {
   text-transform: uppercase;
   margin-top: 18px;
 }
+
+.indicator-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.indicator {
+  background: #e9e4d9;
+  border: 1px solid var(--line);
+  padding: 25px;
+}
+.indicator small {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8b877a;
+}
+.indicator h3 { font: 500 21px var(--serif); margin: 12px 0; }
+.indicator .value { font: 500 30px var(--serif); color: #92764a; }
+.indicator .period { font-size: 9px; color: #77746a; margin-top: 8px; }
+.indicator .description { font-size: 10px; line-height: 1.7; color: #77746a; }
 
 .ad {
   margin-top: 32px;
@@ -480,105 +284,18 @@ a {
   font-size: 8px;
   letter-spacing: 2px;
 }
+.ad strong { display: block; color: #6c695f; font-size: 8px; margin-bottom: 5px; }
 
-.ad strong {
-  display: block;
-  color: #6c695f;
-  font-size: 8px;
-  margin-bottom: 5px;
-}
-
-/* ECONOMIC INDICATORS */
-
-.economic-section {
-  padding: 20px 0 75px;
-}
-
-.economic-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.economic-card {
-  background: #e8e3d7;
-  border: 1px solid #d9d2c4;
-  padding: 25px;
-}
-
-.economic-card small {
-  color: #92764a;
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.economic-card h3 {
-  font: 500 19px var(--serif);
-  margin: 12px 0;
-}
-
-.economic-value {
-  font: 600 30px var(--serif);
-  color: #25251f;
-}
-
-.economic-period {
-  font-size: 10px;
-  color: #77746a;
-  margin-top: 8px;
-  line-height: 1.6;
-}
-
-.economic-source {
-  display: inline-block;
-  font-size: 8px;
-  color: #92764a;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 15px;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 3px;
-}
-
-.data-disclaimer {
-  color: #898579;
-  font-size: 9px;
-  line-height: 1.8;
-  margin-top: 18px;
-}
-
-/* PHILOSOPHY */
-
-.manifesto {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 70px 0;
-}
-
+.manifesto { background: var(--ink); color: var(--paper); padding: 70px 0; }
 .manifestogrid {
   display: grid;
   grid-template-columns: .9fr 1.1fr;
   gap: 70px;
   align-items: start;
 }
-
-.manifesto h2 {
-  font: 500 42px/1.12 var(--serif);
-  margin: 12px 0;
-}
-
-.manifesto .intro {
-  font-size: 12px;
-  line-height: 1.9;
-  color: #b5b1a5;
-  max-width: 410px;
-}
-
-.principles {
-  border-top: 1px solid var(--darkline);
-}
-
+.manifesto h2 { font: 500 42px/1.12 var(--serif); margin: 12px 0; }
+.manifesto .intro { font-size: 12px; line-height: 1.9; color: #b5b1a5; max-width: 410px; }
+.principles { border-top: 1px solid var(--darkline); }
 .principle {
   display: grid;
   grid-template-columns: 38px 1fr;
@@ -586,29 +303,11 @@ a {
   padding: 18px 0;
   border-bottom: 1px solid var(--darkline);
 }
+.num { font: 500 18px var(--serif); color: #c3a66e; }
+.principle b { font: 500 17px var(--serif); }
+.principle p { font-size: 10px; color: #a7a497; line-height: 1.8; margin: 5px 0 0; }
 
-.num {
-  font: 500 18px var(--serif);
-  color: #c3a66e;
-}
-
-.principle b {
-  font: 500 17px var(--serif);
-}
-
-.principle p {
-  font-size: 10px;
-  color: #a7a497;
-  line-height: 1.8;
-  margin: 5px 0 0;
-}
-
-/* NEWSLETTER */
-
-.subscribe {
-  padding: 80px 0;
-}
-
+.subscribe { padding: 80px 0; }
 .signupbox {
   background: #e8e1d3;
   border: 1px solid #d3c8b3;
@@ -618,25 +317,9 @@ a {
   gap: 45px;
   align-items: center;
 }
-
-.signupbox h2 {
-  font: 500 39px/1.1 var(--serif);
-  margin: 10px 0;
-}
-
-.signupbox p {
-  font-size: 11px;
-  line-height: 1.8;
-  color: #6e6a5f;
-}
-
-.signupform {
-  display: flex;
-  border-bottom: 1px solid #777064;
-  padding-bottom: 8px;
-  gap: 8px;
-}
-
+.signupbox h2 { font: 500 39px/1.1 var(--serif); margin: 10px 0; }
+.signupbox p { font-size: 11px; line-height: 1.8; color: #6e6a5f; }
+.signupform { display: flex; border-bottom: 1px solid #777064; padding-bottom: 8px; gap: 8px; }
 .signupform input {
   border: 0;
   background: transparent;
@@ -647,7 +330,6 @@ a {
   padding: 12px 3px;
   color: var(--ink);
 }
-
 .signupform button {
   border: 0;
   background: var(--ink);
@@ -658,247 +340,63 @@ a {
   padding: 0 15px;
   cursor: pointer;
 }
+.fine { font-size: 8px !important; color: #8a8579 !important; }
+.formmsg { min-height: 17px; font-size: 10px; color: #78613a; margin-top: 9px; }
 
-.fine {
-  font-size: 8px !important;
-  color: #8a8579 !important;
+.disclosure { padding: 0 0 65px; }
+.disclosure p { font-size: 9px; color: #888478; line-height: 1.8; max-width: 900px; }
+.footer { background: #11120f; color: #b5b0a3; padding: 30px 0; }
+.footrow { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.footbrand { font: 600 14px var(--serif); letter-spacing: 1.4px; color: #e9e2d4; }
+.footlinks { display: flex; gap: 20px; font-size: 8px; letter-spacing: 1.4px; text-transform: uppercase; }
+.copyright { font-size: 8px; color: #858276; }
+
+@media(max-width:820px) {
+  .hero { grid-template-columns: 1fr; gap: 35px; padding-top: 55px; }
+  .cover { min-height: 350px; }
+  .stories { grid-template-columns: 1fr 1fr; }
+  .story:first-child { grid-column: span 2; padding-left: 0; border-bottom: 1px solid var(--line); }
+  .story:nth-child(2) { padding-left: 0; }
+  .manifestogrid, .signupbox { grid-template-columns: 1fr; gap: 25px; }
+  .tick { padding: 14px 10px; }
+  .tick:first-child { padding-left: 0; }
 }
-
-.formmsg {
-  min-height: 17px;
-  font-size: 10px;
-  color: #78613a;
-  margin-top: 9px;
-}
-
-/* DISCLOSURES AND FOOTER */
-
-.disclosure {
-  padding: 0 0 65px;
-}
-
-.disclosure p {
-  font-size: 9px;
-  color: #888478;
-  line-height: 1.8;
-  max-width: 900px;
-}
-
-.footer {
-  background: #11120f;
-  color: #b5b0a3;
-  padding: 30px 0;
-}
-
-.footrow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.footbrand {
-  font: 600 14px var(--serif);
-  letter-spacing: 1.4px;
-  color: #e9e2d4;
-}
-
-.footlinks {
-  display: flex;
-  gap: 20px;
-  font-size: 8px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-}
-
-.copyright {
-  font-size: 8px;
-  color: #858276;
-}
-
-/* RESPONSIVE DESIGN */
-
-@media(max-width: 820px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 35px;
-    padding-top: 55px;
-  }
-
-  .cover {
-    min-height: 350px;
-  }
-
-  .stories {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .story:first-child {
-    grid-column: span 2;
-    padding-left: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .story:nth-child(2) {
-    padding-left: 0;
-  }
-
-  .manifestogrid {
-    grid-template-columns: 1fr;
-    gap: 35px;
-  }
-
-  .signupbox {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .economic-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .tick {
-    padding: 14px 10px;
-  }
-
-  .tick:first-child {
-    padding-left: 0;
-  }
-}
-
-@media(max-width: 560px) {
-  .wrap {
-    width: calc(100% - 30px);
-  }
-
-  .nav {
-    height: 72px;
-  }
-
-  .links {
-    display: none;
-  }
-
-  .brandname {
-    font-size: 14px;
-  }
-
-  .hero {
-    padding: 48px 0;
-  }
-
-  .hero h1 {
-    font-size: 52px;
-    letter-spacing: -2px;
-  }
-
-  .actions {
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  .cover {
-    padding: 20px;
-    min-height: 330px;
-  }
-
-  .cover h2 {
-    font-size: 34px;
-  }
-
-  .tickerinner {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .tick:nth-child(2) {
-    border-right: 0;
-  }
-
-  .tick:nth-child(1),
-  .tick:nth-child(2) {
-    border-bottom: 1px solid var(--line);
-  }
-
-  .tick:nth-child(3) {
-    padding-left: 0;
-  }
-
-  .section {
-    padding: 55px 0;
-  }
-
-  .sectionhead {
-    display: block;
-  }
-
-  .sectionhead h2 {
-    font-size: 32px;
-  }
-
-  .sectionhead p {
-    margin-top: 12px;
-  }
-
-  .stories {
-    grid-template-columns: 1fr;
-  }
-
-  .story,
-  .story:first-child,
-  .story:nth-child(2),
-  .story:last-child {
+@media(max-width:560px) {
+  .wrap { width: calc(100% - 30px); }
+  .nav { height: 72px; }
+  .links { display: none; }
+  .brandname { font-size: 14px; }
+  .hero { padding: 48px 0; }
+  .hero h1 { font-size: 52px; letter-spacing: -2px; }
+  .actions { gap: 15px; flex-wrap: wrap; }
+  .cover { padding: 20px; min-height: 330px; }
+  .cover h2 { font-size: 34px; }
+  .tickerinner { grid-template-columns: 1fr 1fr; }
+  .tick:nth-child(2) { border-right: 0; }
+  .tick:nth-child(1), .tick:nth-child(2) { border-bottom: 1px solid var(--line); }
+  .tick:nth-child(3) { padding-left: 0; }
+  .section { padding: 55px 0; }
+  .sectionhead { display: block; }
+  .sectionhead h2 { font-size: 32px; }
+  .sectionhead p { margin-top: 12px; }
+  .stories, .indicator-grid { grid-template-columns: 1fr; }
+  .story, .story:first-child, .story:nth-child(2), .story:last-child {
     grid-column: auto;
     padding: 20px 0;
     border-right: 0;
     border-bottom: 1px solid var(--line);
     min-height: 210px;
   }
-
-  .story:last-child {
-    border-bottom: 0;
-  }
-
-  .economic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .manifesto {
-    padding: 55px 0;
-  }
-
-  .manifesto h2 {
-    font-size: 36px;
-  }
-
-  .signupbox {
-    padding: 27px 20px;
-  }
-
-  .signupbox h2 {
-    font-size: 34px;
-  }
-
-  .signupform {
-    flex-direction: column;
-    border: 0;
-  }
-
-  .signupform input {
-    border-bottom: 1px solid #777064;
-  }
-
-  .signupform button {
-    padding: 15px;
-  }
-
-  .footrow {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .footlinks {
-    flex-wrap: wrap;
-  }
+  .story:last-child { border-bottom: 0; }
+  .manifesto { padding: 55px 0; }
+  .manifesto h2 { font-size: 36px; }
+  .signupbox { padding: 27px 20px; }
+  .signupbox h2 { font-size: 34px; }
+  .signupform { flex-direction: column; border: 0; }
+  .signupform input { border-bottom: 1px solid #777064; }
+  .signupform button { padding: 15px; }
+  .footrow { align-items: flex-start; flex-direction: column; }
+  .footlinks { flex-wrap: wrap; }
 }
 </style>
 </head>
@@ -906,8 +404,7 @@ a {
 <body>
 
 <div class="announcement">
-  <b>THE DAILY EDIT</b>
-  &nbsp; A more considered view of the markets
+  <b>THE DAILY EDIT</b> &nbsp; A more considered view of the markets
 </div>
 
 <header class="header">
@@ -922,7 +419,7 @@ a {
 
     <nav class="links">
       <a href="#briefing">The Briefing</a>
-      <a href="#economic-data">Economic Data</a>
+      <a href="#indicators">Economic Data</a>
       <a href="#perspective">Perspective</a>
       <a href="#about">Our Philosophy</a>
     </nav>
@@ -933,39 +430,20 @@ a {
 
 <main>
 
-<!-- HERO -->
-
 <section class="wrap hero">
   <div>
-    <div class="eyebrow">
-      Markets · Business · The bigger picture
-    </div>
-
-    <h1>
-      A clearer view<br>
-      of <i>what moves</i><br>
-      the world.
-    </h1>
-
+    <div class="eyebrow">Markets · Business · The bigger picture</div>
+    <h1>A clearer view<br>of <i>what moves</i><br>the world.</h1>
     <p>
-      The Market Brief is your daily guide to the forces
-      shaping markets — from technology and energy to
-      economic policy and the companies changing how we live.
+      The Market Brief is your daily guide to the forces shaping markets —
+      from technology and energy to economic policy and the companies
+      changing how we live.
     </p>
-
     <div class="actions">
-      <a class="primary" href="#subscribe">
-        Read the daily brief ↗
-      </a>
-
-      <a class="underlink" href="#briefing">
-        Explore the latest
-      </a>
+      <a class="primary" href="#subscribe">Read the daily brief&nbsp; ↗</a>
+      <a class="underlink" href="#briefing">Explore the latest</a>
     </div>
-
-    <p class="note">
-      Independent-minded. Evidence-led. Written for curious people.
-    </p>
+    <p class="note">Independent-minded. Evidence-led. Written for curious people.</p>
   </div>
 
   <aside class="cover">
@@ -973,31 +451,14 @@ a {
       <span>THE MARKET BRIEF / VOL. 001</span>
       <span>THE DAILY EDIT</span>
     </div>
-
     <div class="coverrule"></div>
-
-    <div class="coverlabel">
-      The forces shaping tomorrow
-    </div>
-
+    <div class="coverlabel">The forces shaping tomorrow</div>
     <h2>Beyond the headlines, find the signal.</h2>
-
-    <p>
-      A measured look at the ideas, industries and economic
-      shifts worth understanding.
-    </p>
-
-    <svg class="coverchart" viewBox="0 0 450 120"
-      preserveAspectRatio="none"
-      aria-label="Decorative market chart">
-
-      <path class="grid"
-        d="M0 25H450M0 60H450M0 95H450"/>
-
-      <path
-        d="M0 98 C25 90 38 105 60 82 S95 88 120 70 S150 79 178 55 S215 72 242 48 S276 59 302 35 S336 51 360 29 S400 36 450 8"/>
+    <p>A measured look at the ideas, industries and economic shifts worth understanding.</p>
+    <svg class="coverchart" viewBox="0 0 450 120" preserveAspectRatio="none" aria-label="Decorative market chart">
+      <path class="grid" d="M0 25H450M0 60H450M0 95H450"/>
+      <path d="M0 98 C25 90 38 105 60 82 S95 88 120 70 S150 79 178 55 S215 72 242 48 S276 59 302 35 S336 51 360 29 S400 36 450 8"/>
     </svg>
-
     <div class="coverfoot">
       <span>Clarity in a complex market</span>
       <strong>Est. 2026</strong>
@@ -1005,58 +466,42 @@ a {
   </aside>
 </section>
 
-<!-- THEMES -->
-
 <div class="ticker">
   <div class="wrap tickerinner">
-
     <div class="tick">
       <small>Theme no. 01</small>
       <b>Artificial Intelligence</b>
       <span>Compute · chips · infrastructure</span>
     </div>
-
     <div class="tick">
       <small>Theme no. 02</small>
       <b>Monetary Policy</b>
       <span>Rates · inflation · central banks</span>
     </div>
-
     <div class="tick">
       <small>Theme no. 03</small>
       <b>Energy Transition</b>
       <span>Power · grids · new demand</span>
     </div>
-
     <div class="tick">
       <small>Theme no. 04</small>
       <b>Global Economy</b>
       <span>Trade · consumers · growth</span>
     </div>
-
   </div>
 </div>
 
-<!-- LATEST NEWS -->
-
 <section class="wrap section" id="briefing">
-
   <div class="sectionhead">
     <div>
       <div class="sectiontag">01 — The daily briefing</div>
       <h2>Ideas worth your attention.</h2>
     </div>
-
-    <p>
-      Headlines gathered from official sources.
-      Follow each story to its original publication.
-    </p>
+    <p>Stories gathered from official sources and reviewed before publication. Each story links to its original source.</p>
   </div>
 
   <div id="live-stories" class="stories" aria-live="polite">
-    <p class="briefing-status">
-      Loading the latest market news...
-    </p>
+    <p class="briefing-status">The latest briefing is being prepared. Please check back soon.</p>
   </div>
 
   <div id="briefing-updated" class="briefing-updated"></div>
@@ -1067,191 +512,106 @@ a {
       Reserved space for a clearly disclosed advertising partner
     </div>
   </div>
-
 </section>
 
-<!-- ECONOMIC DATA -->
-
-<section class="wrap economic-section" id="economic-data">
-
+<section class="wrap section" id="indicators">
   <div class="sectionhead">
     <div>
       <div class="sectiontag">02 — The economic picture</div>
       <h2>Numbers behind the news.</h2>
     </div>
-
-    <p>
-      Key economic indicators collected from the
-      Bureau of Labor Statistics.
-    </p>
+    <p>Selected economic indicators collected from the U.S. Bureau of Labor Statistics.</p>
   </div>
 
-  <div id="economic-grid" class="economic-grid">
-    <p class="briefing-status">
-      Loading economic indicators...
-    </p>
+  <div id="economic-grid" class="indicator-grid" aria-live="polite">
+    <p class="briefing-status">Economic data is being loaded.</p>
   </div>
-
-  <p class="data-disclaimer">
-    Economic data is displayed as reported by the original source.
-    Figures may be revised. Always consult the original publication
-    for definitions, methodology and the latest updates.
-  </p>
-
 </section>
-
-<!-- PHILOSOPHY -->
 
 <section class="manifesto" id="perspective">
   <div class="wrap manifestogrid">
-
     <div>
       <div class="eyebrow">03 — Our perspective</div>
-
       <h2>Informed, not overwhelmed.</h2>
-
       <p class="intro">
-        Markets reward curiosity, not noise. Our aim is to make
-        complex developments easier to understand — with context,
-        source links and room for uncertainty.
+        Markets reward curiosity, not noise. Our aim is to make complex
+        developments easier to understand — with context, source links
+        and room for uncertainty.
       </p>
     </div>
 
     <div class="principles">
-
       <div class="principle">
         <div class="num">01</div>
         <div>
           <b>Context before commentary</b>
-          <p>
-            What happened is only the beginning. We explain the
-            drivers, the affected industries and what remains uncertain.
-          </p>
+          <p>What happened is only the beginning. We explain the drivers, the affected industries and what remains uncertain.</p>
         </div>
       </div>
-
       <div class="principle">
         <div class="num">02</div>
         <div>
           <b>Sources you can follow</b>
-          <p>
-            Reporting should link to original filings, company releases,
-            public data and credible journalism.
-          </p>
+          <p>Reporting should link to original filings, company releases, public data and credible journalism.</p>
         </div>
       </div>
-
       <div class="principle">
         <div class="num">03</div>
         <div>
           <b>No promises. No panic.</b>
-          <p>
-            We do not sell predictions or guaranteed returns.
-            We help readers ask better questions.
-          </p>
+          <p>We do not sell predictions or guaranteed returns. We help readers ask better questions.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-
 <section class="wrap subscribe" id="subscribe">
-
   <div class="signupbox">
-
     <div>
       <div class="sectiontag">04 — The daily brief</div>
-
       <h2>A sharper start<br>to your day.</h2>
-
-      <p>
-        Market-moving headlines, emerging themes and clear
-        explanations, delivered in one concise email.
-      </p>
+      <p>Market-moving headlines, emerging themes and clear explanations, delivered in one concise email.</p>
     </div>
 
     <div>
       <form class="signupform" id="signup">
-
-        <input
-          id="email"
-          type="email"
-          placeholder="Your email address"
-          aria-label="Your email address"
-          required
-        >
-
-        <button type="submit">
-          Join the newsletter ↗
-        </button>
-
+        <input id="email" type="email" placeholder="Your email address" aria-label="Your email address" required>
+        <button type="submit">Join the newsletter ↗</button>
       </form>
-
       <div class="formmsg" id="formmsg" aria-live="polite"></div>
-
-      <p class="fine">
-        This preview form is not connected to an email provider yet.
-        Connect your approved newsletter platform before launch.
-      </p>
+      <p class="fine">This preview form is not connected to an email provider yet. Connect your approved newsletter platform before launch.</p>
     </div>
-
   </div>
 </section>
 
-<!-- DISCLOSURES -->
-
 <section class="wrap disclosure" id="about">
-
-  <div class="sectiontag">
-    Editorial standards & disclosures
-  </div>
-
+  <div class="sectiontag">Editorial standards & disclosures</div>
   <p>
-    The Market Brief provides general educational information,
-    not personalized investment advice or a recommendation to buy
-    or sell any security. Investing involves risk, including possible
-    loss of principal. Articles should be fact-checked, dated and
-    linked to their sources.
-
-    Sponsored content, advertising and affiliate links must be
-    clearly identified; affiliate relationships do not determine
-    editorial coverage.
+    The Market Brief provides general educational information, not personalized
+    investment advice or a recommendation to buy or sell any security.
+    Investing involves risk, including possible loss of principal. Articles
+    should be fact-checked, dated and linked to their sources.
+    Sponsored content, advertising and affiliate links must be clearly
+    identified; affiliate relationships do not determine editorial coverage.
   </p>
-
 </section>
 
 </main>
 
-<!-- FOOTER -->
-
 <footer class="footer">
   <div class="wrap footrow">
-
-    <a class="footbrand" href="#">
-      THE MARKET BRIEF
-    </a>
-
+    <a class="footbrand" href="#">THE MARKET BRIEF</a>
     <div class="footlinks">
       <a href="#briefing">Briefing</a>
-      <a href="#economic-data">Economic Data</a>
       <a href="#about">Disclosures</a>
       <a href="mailto:editor@yourdomain.com">Contact</a>
     </div>
-
-    <span class="copyright">
-      © 2026 THE MARKET BRIEF
-    </span>
-
+    <span class="copyright">© 2026 THE MARKET BRIEF</span>
   </div>
 </footer>
 
 <script>
-
-/* NEWSLETTER PREVIEW FORM */
-
 document.getElementById("signup").addEventListener("submit", function(event) {
   event.preventDefault();
 
@@ -1266,293 +626,140 @@ document.getElementById("signup").addEventListener("submit", function(event) {
     "Preview only: connect your newsletter provider to activate signups.";
 });
 
-
-/* HELPER FUNCTIONS */
-
-function createElement(tag, className, text) {
-  const element = document.createElement(tag);
-
-  if (className) {
-    element.className = className;
-  }
-
-  if (text !== undefined) {
-    element.textContent = text;
-  }
-
-  return element;
-}
-
-
-function formatDate(dateString) {
-  if (!dateString) {
-    return "Source update";
-  }
-
-  const date = new Date(dateString);
-
-  if (Number.isNaN(date.getTime())) {
-    return "Source update";
-  }
-
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric"
-  });
-}
-
-
-function safeSourceLink(url) {
-  try {
-    const parsed = new URL(url);
-
-    if (
-      parsed.protocol !== "https:" &&
-      parsed.protocol !== "http:"
-    ) {
-      return null;
-    }
-
-    return parsed.href;
-
-  } catch {
-    return null;
-  }
-}
-
-
-/* LOAD MARKET NEWS AND ECONOMIC DATA */
-
-async function loadMarketBrief() {
-
-  const newsContainer = document.getElementById("live-stories");
-
+(async function loadMarketBrief() {
+  const storiesContainer = document.getElementById("live-stories");
   const economicContainer = document.getElementById("economic-grid");
+  const updatedElement = document.getElementById("briefing-updated");
 
-  const updated = document.getElementById("briefing-updated");
+  const escapeHTML = (value) =>
+    String(value ?? "").replace(/[&<>"']/g, character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[character]);
 
   try {
-
     const response = await fetch(
       "./data/latest-news.json?ts=" + Date.now(),
       { cache: "no-store" }
     );
 
     if (!response.ok) {
-      throw new Error("Could not retrieve market news.");
+      throw new Error("Could not load the latest news data.");
     }
 
     const data = await response.json();
 
-    /* DISPLAY NEWS ARTICLES */
-
-    newsContainer.replaceChildren();
-
-    const articles = Array.isArray(data.articles)
-      ? data.articles.slice(0, 12)
+    // Only approved and published articles are displayed.
+    const publishedArticles = Array.isArray(data.articles)
+      ? data.articles.filter(article =>
+          article.status === "published"
+        )
       : [];
 
-    if (articles.length === 0) {
+    const stories = publishedArticles
+      .filter(article =>
+        article.title &&
+        article.url &&
+        /^https?:\/\//i.test(article.url)
+      )
+      .slice(0, 12);
 
-      newsContainer.appendChild(
-        createElement(
-          "p",
-          "briefing-status",
-          "No news articles are available yet. Please check back soon."
-        )
-      );
-
+    if (!stories.length) {
+      storiesContainer.innerHTML =
+        '<p class="briefing-status">The next edition is being prepared and reviewed. Please check back soon.</p>';
     } else {
+      storiesContainer.innerHTML = stories.map(article => {
+        const date = article.published
+          ? new Date(article.published).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            })
+          : "Source update";
 
-      articles.forEach(article => {
-
-        const card = createElement("article", "story");
-
-        const category = createElement(
-          "div",
-          "category",
-          article.category || article.source || "Markets"
-        );
-
-        const heading = createElement(
-          "h3",
-          "",
-          article.title || "Untitled article"
-        );
-
-        const summary = createElement(
-          "p",
-          "",
-          article.summary ||
-          "Follow the original source for the full report and details."
-        );
-
-        const meta = createElement("div", "meta");
-
-        const date = createElement(
-          "span",
-          "",
-          formatDate(article.published)
-        );
-
-        const link = document.createElement("a");
-
-        const validUrl = safeSourceLink(article.url);
-
-        if (validUrl) {
-
-          link.className = "source-link";
-          link.href = validUrl;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "Original source ↗";
-
-        } else {
-
-          link.textContent = "Source unavailable";
-
-        }
-
-        meta.append(date, link);
-
-        card.append(
-          category,
-          heading,
-          summary,
-          meta
-        );
-
-        newsContainer.appendChild(card);
-
-      });
-
+        return `
+          <article class="story">
+            <div class="category">${escapeHTML(article.category || "Markets")}</div>
+            <h3>${escapeHTML(article.title)}</h3>
+            <p>${escapeHTML(article.summary || "Read the original source for more information.")}</p>
+            <div class="meta">
+              <span>${escapeHTML(date)}</span>
+              <a class="source-link"
+                 href="${escapeHTML(article.url)}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                 Original source ↗
+              </a>
+            </div>
+          </article>
+        `;
+      }).join("");
     }
 
+    // Display the time the news collector last updated the file.
+    if (data.last_updated) {
+      updatedElement.textContent =
+        "News data last updated " +
+        new Date(data.last_updated).toLocaleString("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short"
+        });
+    }
 
-    /* DISPLAY ECONOMIC INDICATORS */
-
-    economicContainer.replaceChildren();
-
-    const economicData = Array.isArray(data.economic_data)
+    // Display the economic indicators collected by the BLS API.
+    const indicators = Array.isArray(data.economic_data)
       ? data.economic_data
       : [];
 
-    if (economicData.length === 0) {
-
-      economicContainer.appendChild(
-        createElement(
-          "p",
-          "briefing-status",
-          "Economic data is temporarily unavailable."
-        )
-      );
-
+    if (!indicators.length) {
+      economicContainer.innerHTML =
+        '<p class="briefing-status">Economic indicators are not available right now.</p>';
     } else {
+      economicContainer.innerHTML = indicators.map(item => {
+        const value = Number(item.value);
+        const formattedValue = Number.isFinite(value)
+          ? value.toLocaleString("en-US", {
+              maximumFractionDigits: 2
+            })
+          : escapeHTML(item.value);
 
-      economicData.forEach(item => {
-
-        const card = createElement("article", "economic-card");
-
-        const label = createElement(
-          "small",
-          "",
-          "BUREAU OF LABOR STATISTICS"
-        );
-
-        const heading = createElement(
-          "h3",
-          "",
-          item.name || "Economic Indicator"
-        );
-
-        const value = createElement(
-          "div",
-          "economic-value",
-          `${item.value ?? "N/A"} ${item.unit || ""}`
-        );
-
-        const period = createElement(
-          "p",
-          "economic-period",
-          `Reporting period: ${item.period || "Not specified"} ${item.year || ""}`
-        );
-
-        const source = document.createElement("a");
-
-        source.className = "economic-source";
-        source.href = "https://www.bls.gov/";
-        source.target = "_blank";
-        source.rel = "noopener noreferrer";
-        source.textContent = "BLS original source ↗";
-
-        card.append(
-          label,
-          heading,
-          value,
-          period,
-          source
-        );
-
-        economicContainer.appendChild(card);
-
-      });
-
-    }
-
-
-    /* DISPLAY LAST UPDATE */
-
-    if (data.last_updated) {
-
-      const updateDate = new Date(data.last_updated);
-
-      if (!Number.isNaN(updateDate.getTime())) {
-
-        updated.textContent =
-          "Data last collected " +
-          updateDate.toLocaleString("en-US", {
-            dateStyle: "medium",
-            timeStyle: "short"
-          });
-
-      }
-
+        return `
+          <article class="indicator">
+            <small>U.S. Economic Indicator</small>
+            <h3>${escapeHTML(item.name)}</h3>
+            <div class="value">${formattedValue}</div>
+            <div class="period">
+              ${escapeHTML(item.period || "")}
+              ${escapeHTML(item.year || "")}
+              · ${escapeHTML(item.unit || "")}
+            </div>
+            <p class="description">${escapeHTML(item.description || "")}</p>
+            <p class="description">
+              Source:
+              <a href="https://www.bls.gov/"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Bureau of Labor Statistics ↗
+              </a>
+            </p>
+          </article>
+        `;
+      }).join("");
     }
 
   } catch (error) {
+    storiesContainer.innerHTML =
+      '<p class="briefing-status">The latest briefing is not available right now. Please check back later.</p>';
+
+    economicContainer.innerHTML =
+      '<p class="briefing-status">Economic data could not be loaded right now.</p>';
 
     console.error("Market Brief loading error:", error);
-
-    newsContainer.replaceChildren();
-
-    newsContainer.appendChild(
-      createElement(
-        "p",
-        "briefing-status",
-        "Market news is temporarily unavailable. Please check back later."
-      )
-    );
-
-    economicContainer.replaceChildren();
-
-    economicContainer.appendChild(
-      createElement(
-        "p",
-        "briefing-status",
-        "Economic data is temporarily unavailable."
-      )
-    );
-
   }
-
-}
-
-
-/* START WEBSITE DATA LOADING */
-
-loadMarketBrief();
-
+})();
 </script>
 
 </body>
