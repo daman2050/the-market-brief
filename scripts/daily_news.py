@@ -25,7 +25,7 @@ import logging
 import os
 import re
 import sys
-import time
+import calendar
 
 from datetime import datetime, timezone
 from pathlib import Path
@@ -237,7 +237,7 @@ def parse_feed_date(entry):
     if parsed:
         try:
             return datetime.fromtimestamp(
-                time.mktime(parsed),
+                calendar.timegm(parsed),
                 timezone.utc,
             ).isoformat()
         except Exception:
@@ -726,6 +726,9 @@ def send_to_api(payload):
         )
 
         response.raise_for_status()
+        result = response.json()
+        if not result.get("ok"):
+            raise RuntimeError("The private API did not confirm ingestion.")
 
         logger.info(
             "Successfully sent collector data to the private API."
