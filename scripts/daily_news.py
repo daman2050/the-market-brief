@@ -55,6 +55,7 @@ def collect_news():
 
         if feed.bozo:
             print(f"Warning: Could not fully read {source['name']}")
+            print(f"Feed error: {feed.bozo_exception}")
 
         for entry in feed.entries:
             title = clean_text(entry.get("title"))
