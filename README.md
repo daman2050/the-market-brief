@@ -78,3 +78,25 @@ This avoids paid market-data APIs and uses TradingView embeds. Cloudflare and Gi
 
 ## Financial disclosure
 The Market Brief provides general educational information, not personalized investment advice or recommendations. Market data may be delayed. Readers should consult original sources and independently verify information.
+
+## Monetization and commercial flexibility
+
+The project is intentionally not tied to one payment provider or revenue model. The current release is a publishing platform, not a paid product, and it does not activate payments or advertising automatically.
+
+Revenue paths that can be added without replacing the core site:
+- **Advertising:** reserve responsive display-ad placements in the homepage layout. Add a compliant ad provider only after approval and policy review.
+- **Sponsorships:** offer clearly labeled sponsored placements or newsletter sponsorships. Keep sponsorship sales separate from editorial approval.
+- **Paid membership:** add a premium tier later for member-only research, archives, or briefings. Keep public market pages and public editorial APIs independent of any membership provider.
+- **Newsletter sponsorships:** connect an opt-in mailing-list provider later; collect only consented email addresses and provide unsubscribe controls.
+- **Affiliate partnerships:** use disclosed, relevant affiliate links. Never imply an affiliate relationship changes the editorial view.
+
+### Monetization safeguards
+- The current homepage includes a partnership inquiry contact point; it does not claim that ad inventory is already sold.
+- No ad network, affiliate tracking, mailing-list service, checkout, or payment processor is currently connected.
+- Do not place ad scripts inside TradingView widgets or modify their attribution. Keep the provider's embed code and source branding intact, and check current provider terms before commercial deployment.
+- Clearly label advertisements, sponsored content, and affiliate links at the point where readers encounter them. Maintain a visible disclosure policy.
+- Preserve editorial independence: advertisers and sponsors cannot buy favorable coverage, change ratings, or approve independent reporting.
+- Keep any future subscriber entitlements in a separate access-control layer. Do not make the public quote widgets, published editorial API, or D1 data model dependent on a specific payment vendor.
+- Before enabling paid services, review applicable age, business, tax, consumer-protection, privacy, email-marketing, and payment-provider requirements with a parent/guardian and qualified professional. Payment providers may require an adult account holder.
+
+The site can therefore begin as a free publication and add suitable revenue streams later without rebuilding its core market-data and editorial systems.
