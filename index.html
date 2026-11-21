@@ -641,20 +641,20 @@ document.getElementById("signup").addEventListener("submit", function(event) {
     })[character]);
 
   try {
-    const response = await fetch(
-      "./data/latest-news.json?ts=" + Date.now(),
+    // Public stories come only from the separate approved-publication file.
+    const publishedResponse = await fetch(
+      "./data/published-news.json?ts=" + Date.now(),
       { cache: "no-store" }
     );
 
-    if (!response.ok) {
-      throw new Error("Could not load the latest news data.");
+    if (!publishedResponse.ok) {
+      throw new Error("Could not load published news.");
     }
 
-    const data = await response.json();
+    const publishedData = await publishedResponse.json();
 
-    // Only approved and published articles are displayed.
-    const publishedArticles = Array.isArray(data.articles)
-      ? data.articles.filter(article =>
+    const publishedArticles = Array.isArray(publishedData.articles)
+      ? publishedData.articles.filter(article =>
           article.status === "published"
         )
       : [];
@@ -699,19 +699,29 @@ document.getElementById("signup").addEventListener("submit", function(event) {
       }).join("");
     }
 
-    // Display the time the news collector last updated the file.
-    if (data.last_updated) {
+    if (publishedData.last_updated) {
       updatedElement.textContent =
-        "News data last updated " +
-        new Date(data.last_updated).toLocaleString("en-US", {
+        "Published briefing last updated " +
+        new Date(publishedData.last_updated).toLocaleString("en-US", {
           dateStyle: "medium",
           timeStyle: "short"
         });
     }
 
-    // Display the economic indicators collected by the BLS API.
-    const indicators = Array.isArray(data.economic_data)
-      ? data.economic_data
+    // Economic indicators continue to come from the automated news file.
+    const economicResponse = await fetch(
+      "./data/latest-news.json?ts=" + Date.now(),
+      { cache: "no-store" }
+    );
+
+    if (!economicResponse.ok) {
+      throw new Error("Could not load economic data.");
+    }
+
+    const economicData = await economicResponse.json();
+
+    const indicators = Array.isArray(economicData.economic_data)
+      ? economicData.economic_data
       : [];
 
     if (!indicators.length) {
@@ -726,6 +736,12 @@ document.getElementById("signup").addEventListener("submit", function(event) {
             })
           : escapeHTML(item.value);
 
+        let displayUnit = item.unit || "";
+
+        if (item.series_id === "CES0000000001") {
+          displayUnit = "Thousands of jobs";
+        }
+
         return `
           <article class="indicator">
             <small>U.S. Economic Indicator</small>
@@ -734,7 +750,7 @@ document.getElementById("signup").addEventListener("submit", function(event) {
             <div class="period">
               ${escapeHTML(item.period || "")}
               ${escapeHTML(item.year || "")}
-              · ${escapeHTML(item.unit || "")}
+              · ${escapeHTML(displayUnit)}
             </div>
             <p class="description">${escapeHTML(item.description || "")}</p>
             <p class="description">
@@ -752,7 +768,7 @@ document.getElementById("signup").addEventListener("submit", function(event) {
 
   } catch (error) {
     storiesContainer.innerHTML =
-      '<p class="briefing-status">The latest briefing is not available right now. Please check back later.</p>';
+      '<p class="briefing-status">The published briefing is not available right now. Please check back later.</p>';
 
     economicContainer.innerHTML =
       '<p class="briefing-status">Economic data could not be loaded right now.</p>';
