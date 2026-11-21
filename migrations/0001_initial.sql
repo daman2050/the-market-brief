@@ -35,3 +35,9 @@ CREATE TABLE IF NOT EXISTS system_events (
 INSERT INTO articles(title,summary,source,category,region,url,published_at,status,filing_type,created_at,updated_at)
 VALUES('10-Q - HOME DEPOT, INC. (0000354950) (Filer)','Home Depot filed a quarterly report with the SEC on November 20, 2026. Review the original filing for the company''s financial statements, business updates, and disclosures.','SEC Form 10-Q Filings','SEC Company Filing','United States','https://www.sec.gov/Archives/edgar/data/354950/000162828026075287/0001628280-26-075287-index.htm','2026-11-20T21:21:23+00:00','published','10-Q','2026-11-20T21:21:23+00:00','2026-11-20T21:21:23+00:00')
 ON CONFLICT(url) DO NOTHING;
+
+INSERT INTO economic_indicators(series_id,name,country,value,unit,period,source,description,updated_at) VALUES
+('CUSR0000SA0','Consumer Price Index (CPI)','United States','337.476','Index','October 2026','Bureau of Labor Statistics','Consumer prices for all urban consumers, U.S. city average, seasonally adjusted.','2026-11-20T00:00:00+00:00'),
+('LNS14000000','Unemployment Rate','United States','4.1','Percent','October 2026','Bureau of Labor Statistics','Civilian unemployment rate, seasonally adjusted.','2026-11-20T00:00:00+00:00'),
+('CES0000000001','Nonfarm Payrolls','United States','159293','Thousands of jobs','October 2026','Bureau of Labor Statistics','Total nonfarm employees, seasonally adjusted.','2026-11-20T00:00:00+00:00')
+ON CONFLICT(series_id) DO NOTHING;
