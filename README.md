@@ -74,7 +74,7 @@ Repository variables:
 Repository secret:
 - `MARKET_BRIEF_INGEST_SECRET`: exactly the Worker `INGEST_SECRET` value.
 
-The collector is scheduled five times every day at 11:00, 14:00, 17:00, 20:00, and 23:00 UTC (approximately three hours apart). GitHub Actions uses UTC; these times shift relative to U.S. local time when daylight saving time changes. The schedule becomes active after the workflow is merged into the default branch. Each run sends newly collected stories and economic observations to the private Worker API as drafts; it does not automatically publish stories. An editor must verify and approve each story before it appears publicly. The collector no longer commits collector output or draft stories to the public repository.
+The collector is scheduled five times every day at 11:17, 14:17, 17:17, 20:17, and 23:17 UTC (approximately three hours apart). GitHub Actions uses UTC; these times shift relative to U.S. local time when daylight saving time changes. The schedule becomes active after the workflow is merged into the default branch. Each run sends newly collected stories and economic observations to the private Worker API as drafts; it does not automatically publish stories. An editor must verify and approve each story before it appears publicly. The collector no longer commits collector output or draft stories to the public repository.
 
 ## Optional automatic deployment
 The `.github/workflows/deploy-worker.yml` workflow deploys when Worker files change on `main`. Add:
